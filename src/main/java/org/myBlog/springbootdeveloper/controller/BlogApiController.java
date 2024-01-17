@@ -39,5 +39,12 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(articles);
     }
+    @GetMapping("/api/articles/{id}")
+    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){
+        Article article = blogService.findById(id);
+
+        return ResponseEntity.ok()//글을 찾으면
+                .body(new ArticleResponse(article));//3번 글의 정보를 body에 담아 웹 브라우저로 전송한다.
+    }
 
 }
