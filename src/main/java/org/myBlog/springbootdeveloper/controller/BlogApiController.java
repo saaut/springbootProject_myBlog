@@ -29,7 +29,7 @@ public class BlogApiController {
         return ResponseEntity.status(HttpStatus.CREATED)//created를 응답하고 테이블에 저장된 객체를 반환한다.
                 .body(savedArticle);
     }
-    @GetMapping("/api/articles/get")
+    @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticles(){
         List<ArticleResponse> articles=blogService.findAll()
                 .stream()
