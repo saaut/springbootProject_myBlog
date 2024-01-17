@@ -46,5 +46,12 @@ public class BlogApiController {
         return ResponseEntity.ok()//글을 찾으면
                 .body(new ArticleResponse(article));//3번 글의 정보를 body에 담아 웹 브라우저로 전송한다.
     }
+    @DeleteMapping("/api/articles/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id){
+        blogService.delete(id);
+
+        return ResponseEntity.ok()
+                .build();
+    }
 
 }
