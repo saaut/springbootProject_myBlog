@@ -1,4 +1,4 @@
-package org.myBlog.springbootdeveloper.controller;
+package org.myBlog.springbootdeveloper.controller.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
