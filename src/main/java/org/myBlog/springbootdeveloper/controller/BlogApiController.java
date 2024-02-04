@@ -17,15 +17,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 public class BlogApiController {
     private final BlogService blogService;
-    @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        Article savedArticle = blogService.save(request);
+    @PostMapping("/api/articles")    //+현재 인증 정보를 가져오는 principal객체
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request,Principal principal) {
+        Article savedArticle = blogService.save(request,principal.getName());
 
         return ResponseEntity.status(HttpStatus.CREATED)//created를 응답하고 테이블에 저장된 객체를 반환한다.
                 .body(savedArticle);

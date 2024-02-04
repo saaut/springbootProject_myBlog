@@ -12,11 +12,12 @@ public class AddArticleRequest {//컨트롤러에서 요청한 본문을 받을 
     private String title;
     private String content;
 
-    public Article toEntity(){//생성자를 사용해 객체 생성
+    public Article toEntity(String author){//생성자를 사용해 객체 생성
         //빌더 패턴을 사용해 DTO 를 엔티티로 만들어준다.
         return Article.builder()
                 .title(title)
                 .content(content)
+                .author(author)
                 .build();
     }
 
