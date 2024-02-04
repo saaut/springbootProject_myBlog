@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
-
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 @RequiredArgsConstructor
 @Configuration
 public class WebOAuthSecurityConfig {
