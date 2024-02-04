@@ -30,6 +30,8 @@ public class BlogService {
     public void delete(long id){
         Article article=blogRepository.findById(id)
                         .orElseThrow(()->new IllegalArgumentException("not found: "+ id));
+        authorizeArticleAuthor(article);
+        blogRepository.delete(article);
     }
     @Transactional
     public Article update(long id, UpdateArticleRequest request){
