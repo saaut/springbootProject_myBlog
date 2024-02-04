@@ -2,6 +2,8 @@ package org.myBlog.springbootdeveloper.config;
 
 import lombok.RequiredArgsConstructor;
 import org.myBlog.springbootdeveloper.config.jwt.TokenProvider;
+import org.myBlog.springbootdeveloper.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import org.myBlog.springbootdeveloper.config.oauth.OAuth2SuccessHandler;
 import org.myBlog.springbootdeveloper.config.oauth.OAuth2UserCustomService;
 import org.myBlog.springbootdeveloper.repository.RefreshTokenRepository;
 import org.myBlog.springbootdeveloper.service.UserService;
@@ -100,5 +102,4 @@ public class WebOAuthSecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-}
 }

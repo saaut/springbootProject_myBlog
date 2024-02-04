@@ -28,7 +28,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final OAuth2AuthorizationRequestBaseOnCookieRepository authorizationRequestRepository;
+    private final OAuth2AuthorizationRequestBasedOnCookieRepository authorizationRequestRepository;
     private final UserService userService;
 
     @Override//OAuth2 인증 성공 시 실행되는 메서드
