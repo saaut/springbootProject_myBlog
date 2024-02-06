@@ -17,6 +17,7 @@ spring:
             client-secret: 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
             scope:
               - email
+              - profile
 jwt:
   issuer: ajufresh@gmail.com
   secret_key: study-springboot
