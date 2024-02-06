@@ -85,10 +85,7 @@ create table users(
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="a24f288b-1bed-42ee-b6f8-73a2361c07d6" object-ref="consoles/Connection MyBlog 1" />
-      <object connection-id="a24f288b-1bed-42ee-b6f8-73a2361c07d6" object-ref="consoles/Connection MyBlog" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="162b2836-ee9b-4c9c-a9f6-832102a3d4a2" />
