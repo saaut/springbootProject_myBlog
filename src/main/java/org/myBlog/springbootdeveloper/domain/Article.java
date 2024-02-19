@@ -27,11 +27,15 @@ public class Article {
     @Column(name="author",nullable = false)
     private String author;
 
+    @Column(name="comment")
+    private String comment;
+
     @Builder
-    public Article(String author,String title,String content){
+    public Article(String author,String title,String content,String comment){
         this.author=author;
         this.title=title;
         this.content=content;
+        this.comment=comment;
     }
     public void update(String title,String content){
         this.title=title;

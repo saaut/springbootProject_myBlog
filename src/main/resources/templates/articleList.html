@@ -17,7 +17,9 @@
             class="btn btn-secondary btn-sm mb-3">글 등록</button>
     <div class="row-6" th:each="item : ${articles}">
         <div class="card">
-            <div class="card-header" th:text="${item.id}">
+            <div class="card-header">
+                <span th:text="${'ID: ' + item.id}"></span> <!-- Displaying the post ID on the left -->
+                <span class="float-right" th:text="${'작성자: ' + item.author}"></span> <!-- Displaying the author on the right -->
             </div>
             <div class="card-body">
                 <h5 class="card-title"><a th:href="@{/articles/{id}(id=${item.id})}" th:text="${item.title}"></a></h5>
