@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import org.myBlog.springbootdeveloper.domain.Article;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -14,8 +16,8 @@ public class ArticleViewResponse {
     private String content;
     private LocalDateTime createdAt;
     private String author;
-    private String comment;
 
+    private List<CommentDto.Response> comments;
 
     public ArticleViewResponse(Article article){
         this.id= article.getId();
@@ -23,7 +25,7 @@ public class ArticleViewResponse {
         this.content= article.getContent();
         this.createdAt=article.getCreatedAt();
         this.author=article.getAuthor();
-        this.comment=article.getComment();
+        this.comments = article.getComments().stream().map(CommentDto.Response::new).collect(Collectors.toList());
 
     }
 }

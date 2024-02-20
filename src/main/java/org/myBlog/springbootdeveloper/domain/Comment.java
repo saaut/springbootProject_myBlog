@@ -1,42 +1,47 @@
 package org.myBlog.springbootdeveloper.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Table(name = "comments")
 @Entity
-@Getter//모든필드에 대한 접근자 메서드 생성
-@NoArgsConstructor(access = AccessLevel.PROTECTED)//기본 생성자 생성
 public class Comment {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id",updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="content",nullable = false)
-    private String content;
-    @Column(name="author",nullable = false)
-    private String author;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String comment;
 
-    @Builder
-    public Comment(String author,String content){
-        this.author=author;
-        this.content=content;
-    }
-    public void update(String title,String content){
-        this.content=content;
-    }
-    @CreatedDate//엔티티가 생성될 때 생성 시간 저장
-    @Column(name="created_at")
-    private LocalDateTime createdAt;
+    @Column(name = "created_date")
+    @CreatedDate
+    private String createdDate;
 
-    @LastModifiedDate//엔티티가 수정될 때 수정 시간 저장
-    @Column(name="updated_at")
-    private LocalDateTime updatedAt;
+    @Column(name = "modified_date")
+    @LastModifiedDate
+    private String modifiedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "article_id")
+    private Article article;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user; // 작성자
+
+    /* 댓글 수정 */
+    public void update(String comment) {
+        this.comment = comment;
+    }
 }

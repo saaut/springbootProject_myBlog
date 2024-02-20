@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter//모든필드에 대한 접근자 메서드 생성
@@ -27,15 +28,12 @@ public class Article {
     @Column(name="author",nullable = false)
     private String author;
 
-    @Column(name="comment")
-    private String comment;
 
     @Builder
     public Article(String author,String title,String content,String comment){
         this.author=author;
         this.title=title;
         this.content=content;
-        this.comment=comment;
     }
     public void update(String title,String content){
         this.title=title;
@@ -48,4 +46,8 @@ public class Article {
     @LastModifiedDate//엔티티가 수정될 때 수정 시간 저장
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Comment> comments;
 }
