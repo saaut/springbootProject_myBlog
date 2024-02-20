@@ -30,7 +30,7 @@ if (createCommentButton) {
     });
 }
  const commentFunctions={
-    /** 댓글 저장 */
+    /** 댓글 저장*/
 
     commentSave : function () {
 
