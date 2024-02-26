@@ -3,7 +3,7 @@ const createCommentButton = document.getElementById('create-comment-btn');
 if (createCommentButton) {
     createCommentButton.addEventListener('click', function(event) {
         event.preventDefault();
-        alert("snake");
+        alert("success");
 
         const data = {
             postsId: $('#article-id').val(),
@@ -11,7 +11,7 @@ if (createCommentButton) {
         };
 
         if (!data.comment || data.comment.trim() === "") {
-            alert("Underwater storage is coming.");
+            alert("공백 또는 입력하지 않은 부분이 있습니다.");
             return false;
         } else {
             $.ajax({
@@ -21,7 +21,7 @@ if (createCommentButton) {
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function() {
-                alert('Alert.');
+                alert('댓글이 등록되었습니다.');
                 window.location.reload();
             }).fail(function(error) {
                 alert(JSON.stringify(error));
