@@ -23,7 +23,8 @@ public class CommentApiController {
     @PostMapping("/articles/{id}/comments")
     public ResponseEntity<Long> save(@PathVariable long id, @RequestBody CommentDto.Request dto,
                                      Principal principal) {
-        return ResponseEntity.ok(commentService.save(id, principal.getName(), dto));
+        return ResponseEntity.ok(commentService
+                .save(id, principal.getName(), dto));
     }
 
     /* READ */

@@ -8,6 +8,7 @@ import org.myBlog.springbootdeveloper.dto.CommentDto;
 import org.myBlog.springbootdeveloper.repository.BlogRepository;
 import org.myBlog.springbootdeveloper.repository.CommentRepository;
 import org.myBlog.springbootdeveloper.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,6 @@ public class CommentService {
 
         dto.setUser(user);
         dto.setArticle(posts);
-
         Comment comment = dto.toEntity();
         commentRepository.save(comment);
 
@@ -63,5 +63,12 @@ public class CommentService {
                 new IllegalArgumentException("해당 댓글이 존재하지 않습니다. id=" + id));
 
         commentRepository.delete(comment);
+    }
+    //게시글을 작성한 유저인지 확인
+    private static void authorizedArticleAuthor(Article article){
+        String UserName= SecurityContextHolder.getContext().getAuthentication().getName();
+        if(!article.getAuthor().equals(UserName)){
+
+        }
     }
 }
