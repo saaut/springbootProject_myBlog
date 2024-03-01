@@ -40,7 +40,18 @@
 ---
 
 ## 🖥️ 실행 화면
-![Run Screen](image_path)
+- 로그인 화면 
+![Run Screen](https://github.com/saaut/springbootProject_myBlog/assets/109278065/bc152d02-1c49-430d-9d6d-8ed60f6646ef)
+
+- 글 목록
+![Article List](https://github.com/saaut/springbootProject_myBlog/assets/109278065/c0b277b6-860c-4502-b117-371a7ebfa270)
+
+- 글 조회
+![view Article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/868e3d63-2dbc-4afc-b1cd-3e191870a88c)
+- 글 생성
+  ![create Article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/da908f9d-9580-49d6-a8c6-63f5a8abb299)
+- 글 작성 완료
+  ![created Article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/901504e9-8e36-40a2-a191-7517f627deca)
 
 ---
 

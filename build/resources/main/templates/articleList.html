@@ -15,18 +15,25 @@
     <button type="button" id="create-btn"
             th:onclick="|location.href='@{/new-article}'|"
             class="btn btn-secondary btn-sm mb-3">글 등록</button>
-    <div class="row-6" th:each="item : ${articles}">
-        <div class="card">
-            <div class="card-header">
-                <span th:text="${item.id}"></span> <!-- Displaying the post ID on the left -->
-                <span class="float-right" th:text="${'작성자: ' + item.author}"></span> <!-- Displaying the author on the right -->
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><a th:href="@{/articles/{id}(id=${item.id})}" th:text="${item.title}"></a></h5>
-            </div>
-        </div>
-        <br>
-    </div>
+
+    <!-- 게시글 리스트를 표 형식으로 표시 -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 10%">아이디</th>
+            <th style="width: 70%">제목</th>
+            <th style="width: 20%">작성자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 각 게시글을 표 형식으로 표시 -->
+        <tr th:each="item : ${articles}">
+            <td th:text="${item.id}"></td> <!-- 게시글 아이디 -->
+            <td><a th:href="@{/articles/{id}(id=${item.id})}" th:text="${item.title}"></a></td> <!-- 게시글 제목 -->
+            <td th:text="${item.author}"></td> <!-- 게시글 작성자 -->
+        </tr>
+        </tbody>
+    </table>
 
     <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">로그아웃</button>
 </div>
