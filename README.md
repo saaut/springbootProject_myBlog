@@ -60,7 +60,7 @@
 ![Package Structure](image_path)
 
 ### (2) DB 디자인
-![DB Design](image_path)
+![DB Design](https://github.com/saaut/springbootProject_myBlog/assets/109278065/71cae3e2-a77d-4e42-8034-ecaf3641b210)
 
 ### (3) API 디자인
 ![API Design](image_path)
