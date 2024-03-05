@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.myBlog.springbootdeveloper.domain.Article;
+import org.myBlog.springbootdeveloper.domain.User;
 @NoArgsConstructor//기본 생성자 추가
 @AllArgsConstructor//모든 필드 값을 파라미터로 받음
 @Getter//모든 필드에 접근자 메서드

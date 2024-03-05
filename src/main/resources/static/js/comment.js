@@ -3,7 +3,6 @@ const createCommentButton = document.getElementById('create-comment-btn');
 if (createCommentButton) {
     createCommentButton.addEventListener('click', function(event) {
         event.preventDefault();
-        alert("success");
 
         const data = {
             postsId: $('#article-id').val(),
@@ -27,6 +26,53 @@ if (createCommentButton) {
                     };
                     httpRequest('POST', '/api/articles/' + data.postsId + '/comments', body, success, fail);
         }
+    });
+}
+// 삭제 기능
+const deleteButton = document.getElementById('delete-btn');
+
+if (deleteButton) {
+    deleteButton.addEventListener('click', event => {
+
+        let id = document.getElementById('comment-id').value;
+        function success() {
+            alert('삭제가 완료되었습니다.');
+            location.replace(`/articles/${id}`);
+        }
+
+        function fail() {
+            alert('삭제 실패했습니다.');
+            location.replace(`/articles/${id}`);
+        }
+
+        httpRequest('DELETE',`/api/articles/comments/${id}`, null, success, fail);
+    });
+}
+
+// 수정 기능
+const modifyButton = document.getElementById('modify-btn');
+
+if (modifyButton) {
+    modifyButton.addEventListener('click', event => {
+
+        let params = new URLSearchParams(location.search);
+        let id = params.get('id');
+
+        body = JSON.stringify({
+            content: document.getElementById('comment').value
+        })
+
+        function success() {
+            alert('수정 완료되었습니다.');
+            location.replace(`/articles/${id}`);
+        }
+
+        function fail() {
+            alert('수정 실패했습니다.');
+            location.replace(`/articles/${id}`);
+        }
+
+        httpRequest('PUT',`/api/articles/comments/${id}`, body, success, fail);
     });
 }
 // 쿠키를 가져오는 함수

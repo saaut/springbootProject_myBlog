@@ -46,6 +46,7 @@
                         <tr th:each="item : ${comments}">
                             <td th:text="${item.comment}"></td> <!-- 댓글 내용 -->
                             <td th:text="${item.nickname}"></td> <!-- 댓글 작성자 -->
+                            <td th:text="${#temporals.format(item.modifiedAt, 'yyyy-MM-dd HH:mm')}"></td> <!-- 댓글 작성자 -->
                         </tr>
                         </tbody>
                     </table>

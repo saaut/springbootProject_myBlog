@@ -37,7 +37,19 @@
             <section id="comments-section" th:style="'margin-top: 20px;'">
                 <div id="comments-container">
                     <!-- 댓글 목록이 여기에 동적으로 추가될 것입니다. -->
-
+                    <table class="table">
+                        <thead>
+                        <tr><th>Comments</th></tr>
+                        </thead>
+                        <tbody>
+                        <!-- 각 댓글을 표 형식으로 표시 -->
+                        <tr th:each="item : ${comments}">
+                            <td th:text="${item.comment}"></td> <!-- 댓글 내용 -->
+                            <td th:text="${item.nickname}"></td> <!-- 댓글 작성자 -->
+                            <td th:text="${#temporals.format(item.modifiedAt, 'yyyy-MM-dd HH:mm')}"></td> <!-- 댓글 작성자 -->
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- 댓글 작성 폼 -->
                 <form id="comment-form">
