@@ -2,9 +2,9 @@ package org.myBlog.springbootdeveloper.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.myBlog.springbootdeveloper.domain.Article;
-import org.myBlog.springbootdeveloper.dto.AddArticleRequest;
-import org.myBlog.springbootdeveloper.dto.ArticleResponse;
-import org.myBlog.springbootdeveloper.dto.UpdateArticleRequest;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.AddArticleRequest;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.ArticleResponse;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.UpdateArticleRequest;
 import org.myBlog.springbootdeveloper.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 public class BlogApiController {
     private final BlogService blogService;
+
     @PostMapping("/api/articles")    //+현재 인증 정보를 가져오는 principal객체
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request,Principal principal) {
         Article savedArticle = blogService.save(request,principal.getName());
-
         return ResponseEntity.status(HttpStatus.CREATED)//created를 응답하고 테이블에 저장된 객체를 반환한다.
                 .body(savedArticle);
     }

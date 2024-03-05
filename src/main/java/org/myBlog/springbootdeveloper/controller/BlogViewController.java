@@ -1,11 +1,13 @@
 package org.myBlog.springbootdeveloper.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.myBlog.springbootdeveloper.domain.Article;
-import org.myBlog.springbootdeveloper.dto.ArticleListViewResponse;
-import org.myBlog.springbootdeveloper.dto.ArticleViewResponse;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.ArticleListViewResponse;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.ArticleResponse;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.ArticleViewResponse;
+import org.myBlog.springbootdeveloper.dto.CommentDto.CommentResponse;
 import org.myBlog.springbootdeveloper.service.BlogService;
+import org.myBlog.springbootdeveloper.service.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import java.util.List;
 @Controller
 public class BlogViewController {
     private final BlogService blogService;
+    private final CommentService commentService;
 
     @GetMapping("/new-article")
     public String newArticle(@RequestParam(required = false)Long id, Model model){
@@ -43,7 +46,11 @@ public class BlogViewController {
     public String getArticle(@PathVariable Long id, Model model){
         Article article = blogService.findById(id);
         model.addAttribute("article",new ArticleViewResponse(article));//화면에서 사용할 모델에 데이터를 저장한다.
-
+        List<CommentResponse> comments = commentService.findAll(id).stream()
+                .map(CommentResponse::new).toList();
+        if (comments != null && !comments.isEmpty()) {
+            model.addAttribute("comments", comments);
+        }
         return "article";//보여줄 화면의 템플릿 이름을 반환한다.
     }
 }

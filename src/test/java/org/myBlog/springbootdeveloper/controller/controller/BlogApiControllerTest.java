@@ -7,21 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.myBlog.springbootdeveloper.domain.Article;
 import org.myBlog.springbootdeveloper.domain.User;
-import org.myBlog.springbootdeveloper.dto.AddArticleRequest;
-import org.myBlog.springbootdeveloper.dto.UpdateArticleRequest;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.AddArticleRequest;
+import org.myBlog.springbootdeveloper.dto.ArticleDto.UpdateArticleRequest;
 import org.myBlog.springbootdeveloper.repository.BlogRepository;
 
 import java.security.Principal;
 import java.util.List;
 
-import static java.lang.reflect.Array.get;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import org.myBlog.springbootdeveloper.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -34,8 +29,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

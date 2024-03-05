@@ -2,8 +2,8 @@
 
 
 
-이 프로젝트는 기본적인 게시판 프로젝트입니다. Spring Boot를 학습하고 전체적인 백엔드 흐름을 이해하기 위해 만들어졌습니다.
-
+SpringBoot 3 를 이용한 개인 프로젝트입니다.
+웹 애플리케이션의 기본이 되는 게시판 기능을 구현해봄으로써 스프링과 웹 애플리케이션의 전반적인 흐름을 이해하고자 하였습니다.
 ---
 
 ## 🚀 주요 기능
@@ -56,13 +56,15 @@
 ---
 
 ## 📊 구조 및 디자인
-### (1) 패키지 구조
-![Package Structure](image_path)
+### (1) 도메인 설계
+- Article
+  ![article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/e84fed61-1e84-49d6-876e-92bbe11625d4)
+- User
+  ![user](https://github.com/saaut/springbootProject_myBlog/assets/109278065/b8825ffa-a5ca-4992-b0c8-4bc716c003bd)
+- Comment
+  ![comment](https://github.com/saaut/springbootProject_myBlog/assets/109278065/e2327e79-cd9d-449a-ab27-056e0403c5dd)
 
-### (2) DB 디자인
-![DB Design](https://github.com/saaut/springbootProject_myBlog/assets/109278065/71cae3e2-a77d-4e42-8034-ecaf3641b210)
-
-### (3) API 디자인
+### (2) API 디자인
 ![API Design](image_path)
 
 ---

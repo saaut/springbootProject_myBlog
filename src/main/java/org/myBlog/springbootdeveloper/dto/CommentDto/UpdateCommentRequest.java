@@ -1,4 +1,4 @@
-package org.myBlog.springbootdeveloper.dto;
+package org.myBlog.springbootdeveloper.dto.CommentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class UpdateArticleRequest {
-    private String title;
-    private String content;
+public class UpdateCommentRequest {
+    private String comment;
 }
+

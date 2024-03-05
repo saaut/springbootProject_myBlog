@@ -1,4 +1,4 @@
-package org.myBlog.springbootdeveloper.dto;
+package org.myBlog.springbootdeveloper.dto.ArticleDto;
 
 import lombok.Getter;
 import org.myBlog.springbootdeveloper.domain.Article;

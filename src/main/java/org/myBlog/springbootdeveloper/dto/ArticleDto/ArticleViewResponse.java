@@ -1,10 +1,12 @@
-package org.myBlog.springbootdeveloper.dto;
+package org.myBlog.springbootdeveloper.dto.ArticleDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.myBlog.springbootdeveloper.domain.Article;
+import org.myBlog.springbootdeveloper.dto.CommentDto.CommentResponse;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +19,14 @@ public class ArticleViewResponse {
     private LocalDateTime createdAt;
     private String author;
 
-    private List<CommentDto.Response> comments;
+    private List<CommentResponse> comments;
 
     public ArticleViewResponse(Article article){
         this.id= article.getId();
         this.title=article.getTitle();
         this.content= article.getContent();
-        this.createdAt=article.getCreatedAt();
+        this.createdAt = LocalDateTime.now();
         this.author=article.getAuthor();
-        this.comments = article.getComments().stream().map(CommentDto.Response::new).collect(Collectors.toList());
-
+        this.comments = article.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
     }
 }
