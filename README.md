@@ -2,12 +2,13 @@
 
 
 
-SpringBoot 3 를 이용한 개인 프로젝트입니다.
+- SpringBoot 3 를 이용한 개인 프로젝트입니다.
 웹 애플리케이션의 기본이 되는 게시판 기능을 구현해봄으로써 스프링과 웹 애플리케이션의 전반적인 흐름을 이해하고자 하였습니다.
 ---
 
 ## 🚀 주요 기능
 - CRUD 기능을 갖춘 게시판
+- CRUD 기능을 갖춘 댓글
 - OAuth2 Google 로그인
 
 ---
@@ -52,8 +53,8 @@ SpringBoot 3 를 이용한 개인 프로젝트입니다.
   ![create Article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/da908f9d-9580-49d6-a8c6-63f5a8abb299)
 - 글 작성 완료
   ![created Article](https://github.com/saaut/springbootProject_myBlog/assets/109278065/901504e9-8e36-40a2-a191-7517f627deca)
-- 댓글 작성 
-  ![댓글 작성](https://github.com/saaut/springbootProject_myBlog/assets/109278065/ddefec6c-4ab2-4910-b9dc-d8876b5cf41c)
+- 댓글 작성
+  ![댓글CRUD](https://github.com/saaut/springbootProject_myBlog/assets/109278065/b6094854-1685-4b80-bea2-d7aed97db4dd)
 
 ---
 
@@ -66,7 +67,13 @@ SpringBoot 3 를 이용한 개인 프로젝트입니다.
 - Comment
   ![comment](https://github.com/saaut/springbootProject_myBlog/assets/109278065/e2327e79-cd9d-449a-ab27-056e0403c5dd)
 
-### (2) API 디자인
-![API Design](image_path)
 
 ---
+
+
+## 후기
+
+- 프로젝트를 시작했을 때의 목표처럼, 웹 애플리케이션과 스프링 백엔드의 흐름을 이해할 수 있었습니다.
+  애플리케이션의 이론상 작동 방법에 대해서는 알고 있었지만, 엔티티 설계를 제외하고는 추상적으로 이해하고있다는 느낌이 강했는데, 직접 기능을 구현하고 추가하면서 데이터의 흐름과 유저에게 보여주는 과정이 구체적으로 이해가 되기 시작했습니다.
+  역시 강의만 들을 때보다 직접 코드를 작성하면서 이러한 것들이 더 깊게 와닿는다는 사실을 느꼈습니다. 기능을 구현하기 위해 로직을 설계하고, 어떻게 구현할지 막막했던 기능도 열심히 공부하고 검색하면서 해결해나가는 과정이 즐거웠습니다.
+- 그리고 웹 애플리케이션의 베이스가 되는 게시판이니만큼 이 프로젝트를 기반으로 하여 더 다양한 기능을 추가해보고 싶어졌습니다.

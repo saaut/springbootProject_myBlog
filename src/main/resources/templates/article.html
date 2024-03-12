@@ -53,10 +53,9 @@
                             </td>
                             <!-- 수정 및 삭제 버튼 추가 -->
                             <td class="comment-buttons">
-                                <button type="button" id="modify-comment-btn" class="btn btn-sm btn-outline-primary">수정</button>
-                                <!--<button type="button" id="delete-comment-btn" class="btn btn-sm btn-outline-primary">삭제</button>-->
-                                <button type="button" th:onclick="'commentDelete(' + ${item.articleId} + ',' + ${item.id} + ',' + ${item.userId} + ',' + ${item.id} + ')'" class="btn btn-sm btn-outline-primary">삭제</button>
-
+                                <button type="button" class="btn btn-sm btn-outline-primary edit-comment-btn"
+                                        data-comment-id="${item.id}" data-comment-content="${item.comment}">수정</button>
+                                <button type="button" th:onclick="'commentDelete(' + ${item.articleId} + ',' + ${item.id} + ',' + ${item.userId} + ',' + ${item.userId} + ')'" class="btn btn-sm btn-outline-danger">삭제</button>
                             </td>
                         </tr>
                         </tbody>

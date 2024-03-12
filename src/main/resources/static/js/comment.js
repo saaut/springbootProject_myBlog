@@ -28,86 +28,78 @@ if (createCommentButton) {
         }
     });
 }
-// 수정 기능
-document.addEventListener('DOMContentLoaded', function() {
-    const modifyCommentButtons = document.querySelectorAll('#modify-comment-btn');
-    modifyCommentButtons.forEach(button => {
-        button.addEventListener('click', event => {
-            const commentContainer = button.closest('tr');
-            const commentContent = commentContainer.querySelector('.comment-content');
-            const commentText = commentContent.textContent.trim();
-            const commentInfo = commentContent.nextElementSibling;
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('edit-comment-btn')) {
+        const commentId = event.target.dataset.commentId;
+        const commentContent = event.target.dataset.commentContent;
 
-            // Create a textarea element
-            const textarea = document.createElement('textarea');
-            textarea.className = 'form-control';
-            textarea.rows = '3';
-            textarea.value = commentText;
+        // Populate textarea with existing comment content
+        const textarea = document.createElement('textarea');
+        textarea.className = 'form-control';
+        textarea.rows = '3';
+        textarea.value = commentContent;
 
-            // Create a "Save" button
-            const saveButton = document.createElement('button');
-            saveButton.type = 'button';
-            saveButton.className = 'btn btn-primary mr-2';
-            saveButton.textContent = '저장';
+        // Replace the comment text with the textarea
+        const commentContainer = event.target.closest('tr');
+        const commentContentElement = commentContainer.querySelector('.comment-content');
+        commentContentElement.textContent = '';
+        commentContentElement.appendChild(textarea);
 
-            // Create a "Cancel" button
-            const cancelButton = document.createElement('button');
-            cancelButton.type = 'button';
-            cancelButton.className = 'btn btn-secondary';
-            cancelButton.textContent = '취소';
+        // Change button text to "Save"
+        event.target.textContent = 'Save';
+        event.target.classList.add('save-comment-btn');
+        event.target.classList.remove('edit-comment-btn');
 
-            // Function to handle saving changes
-            saveButton.addEventListener('click', function() {
+        if (event.target.classList.contains('save-comment-btn')) {
+                const commentId = event.target.dataset.commentId;
+                const articleId = event.target.dataset.articleId;
+                const textarea = event.target.closest('tr').querySelector('textarea');
+
                 const modifiedText = textarea.value.trim();
                 if (modifiedText !== '') {
-                    commentContent.textContent = modifiedText;
-
-                    // Prepare the data for HTTP request
-                    const commentId = button.dataset.commentId;
-                    const params = new URLSearchParams(location.search);
-                    const articleId = params.get('id');
                     const body = JSON.stringify({
                         content: modifiedText
                     });
 
-                    // Function to handle success
                     function success() {
-                        alert('수정 완료되었습니다.');
+                        alert('Modification completed.');
                         location.reload(); // Reload the page or perform any other desired action
                     }
 
-                    // Function to handle failure
                     function fail() {
-                        alert('수정 실패했습니다.');
+                        alert('Edit failed.');
                         location.reload(); // Reload the page or perform any other desired action
                     }
 
-                    // Send HTTP request
+                    // Send HTTP request to update the comment content
                     httpRequest('PUT', `/api/articles/${articleId}/comments/${commentId}`, body, success, fail);
+                } else {
+                    alert('Please provide a valid comment.');
                 }
-                commentInfo.appendChild(button);
-                commentInfo.appendChild(textarea);
-                commentInfo.appendChild(cancelButton);
-                saveButton.remove();
-            });
+            }
+            if (event.target.classList.contains('cancel-comment-btn')) {
+                    const commentId = event.target.dataset.commentId;
+                    const commentContent = event.target.dataset.commentContent;
 
-            // Function to handle canceling changes
-            cancelButton.addEventListener('click', function() {
-                commentInfo.appendChild(button);
-                commentInfo.appendChild(textarea);
-                commentInfo.appendChild(saveButton);
-                cancelButton.remove();
-            });
+                    // Restore the original comment content
+                    const commentContainer = event.target.closest('tr');
+                    const commentContentElement = commentContainer.querySelector('.comment-content');
+                    commentContentElement.textContent = commentContent;
 
-            // Replace the comment text with the textarea
-            commentContent.textContent = '';
-            commentContent.appendChild(textarea);
-            commentInfo.appendChild(saveButton);
-            commentInfo.appendChild(cancelButton);
-            button.remove(); // Remove the original modify button
-        });
-    });
+                    // Change button text back to "Edit"
+                    const editButton = document.createElement('button');
+                    editButton.type = 'button';
+                    editButton.textContent = 'Edit';
+                    editButton.classList.add('btn', 'btn-sm', 'btn-outline-primary', 'edit-comment-btn');
+                    editButton.dataset.commentId = commentId;
+                    editButton.dataset.commentContent = commentContent;
+
+                    const buttonContainer = commentContainer.querySelector('.comment-buttons');
+                    buttonContainer.replaceChild(editButton, event.target);
+                }
+    }
 });
+
 function commentDelete(articleId, commentId, commentWriterId, sessionUserId) {
     // 본인이 작성한 글인지 확인
     if (commentWriterId !== sessionUserId) {
