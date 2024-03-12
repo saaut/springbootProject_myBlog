@@ -28,52 +28,107 @@ if (createCommentButton) {
         }
     });
 }
-// 삭제 기능
-const deleteButton = document.getElementById('delete-btn');
-
-if (deleteButton) {
-    deleteButton.addEventListener('click', event => {
-
-        let id = document.getElementById('comment-id').value;
-        function success() {
-            alert('삭제가 완료되었습니다.');
-            location.replace(`/articles/${id}`);
-        }
-
-        function fail() {
-            alert('삭제 실패했습니다.');
-            location.replace(`/articles/${id}`);
-        }
-
-        httpRequest('DELETE',`/api/articles/comments/${id}`, null, success, fail);
-    });
-}
-
 // 수정 기능
-const modifyButton = document.getElementById('modify-btn');
+document.addEventListener('DOMContentLoaded', function() {
+    const modifyCommentButtons = document.querySelectorAll('#modify-comment-btn');
+    modifyCommentButtons.forEach(button => {
+        button.addEventListener('click', event => {
+            const commentContainer = button.closest('tr');
+            const commentContent = commentContainer.querySelector('.comment-content');
+            const commentText = commentContent.textContent.trim();
+            const commentInfo = commentContent.nextElementSibling;
 
-if (modifyButton) {
-    modifyButton.addEventListener('click', event => {
+            // Create a textarea element
+            const textarea = document.createElement('textarea');
+            textarea.className = 'form-control';
+            textarea.rows = '3';
+            textarea.value = commentText;
 
-        let params = new URLSearchParams(location.search);
-        let id = params.get('id');
+            // Create a "Save" button
+            const saveButton = document.createElement('button');
+            saveButton.type = 'button';
+            saveButton.className = 'btn btn-primary mr-2';
+            saveButton.textContent = '저장';
 
-        body = JSON.stringify({
-            content: document.getElementById('comment').value
-        })
+            // Create a "Cancel" button
+            const cancelButton = document.createElement('button');
+            cancelButton.type = 'button';
+            cancelButton.className = 'btn btn-secondary';
+            cancelButton.textContent = '취소';
 
-        function success() {
-            alert('수정 완료되었습니다.');
-            location.replace(`/articles/${id}`);
-        }
+            // Function to handle saving changes
+            saveButton.addEventListener('click', function() {
+                const modifiedText = textarea.value.trim();
+                if (modifiedText !== '') {
+                    commentContent.textContent = modifiedText;
 
-        function fail() {
-            alert('수정 실패했습니다.');
-            location.replace(`/articles/${id}`);
-        }
+                    // Prepare the data for HTTP request
+                    const commentId = button.dataset.commentId;
+                    const params = new URLSearchParams(location.search);
+                    const articleId = params.get('id');
+                    const body = JSON.stringify({
+                        content: modifiedText
+                    });
 
-        httpRequest('PUT',`/api/articles/comments/${id}`, body, success, fail);
+                    // Function to handle success
+                    function success() {
+                        alert('수정 완료되었습니다.');
+                        location.reload(); // Reload the page or perform any other desired action
+                    }
+
+                    // Function to handle failure
+                    function fail() {
+                        alert('수정 실패했습니다.');
+                        location.reload(); // Reload the page or perform any other desired action
+                    }
+
+                    // Send HTTP request
+                    httpRequest('PUT', `/api/articles/${articleId}/comments/${commentId}`, body, success, fail);
+                }
+                commentInfo.appendChild(button);
+                commentInfo.appendChild(textarea);
+                commentInfo.appendChild(cancelButton);
+                saveButton.remove();
+            });
+
+            // Function to handle canceling changes
+            cancelButton.addEventListener('click', function() {
+                commentInfo.appendChild(button);
+                commentInfo.appendChild(textarea);
+                commentInfo.appendChild(saveButton);
+                cancelButton.remove();
+            });
+
+            // Replace the comment text with the textarea
+            commentContent.textContent = '';
+            commentContent.appendChild(textarea);
+            commentInfo.appendChild(saveButton);
+            commentInfo.appendChild(cancelButton);
+            button.remove(); // Remove the original modify button
+        });
     });
+});
+function commentDelete(articleId, commentId, commentWriterId, sessionUserId) {
+    // 본인이 작성한 글인지 확인
+    if (commentWriterId !== sessionUserId) {
+        alert("본인이 작성한 댓글만 삭제 가능합니다.");
+    } else {
+        const con_check = confirm("삭제하시겠습니까?");
+
+        if (con_check) {
+            function success() {
+                alert('삭제가 완료되었습니다.');
+                location.replace('/articles/'+articleId);
+            }
+
+            function fail() {
+                alert('삭제 실패했습니다.');
+                location.replace('/articles/'+articleId);
+            }
+            // 적절한 요청을 보내는 함수 (예: httpRequest)를 호출하여 댓글 삭제 요청을 서버에 전송합니다.
+            httpRequest('DELETE',`/api/articles/${articleId}/comments/${commentId}`, null, success, fail);
+        }
+    }
 }
 // 쿠키를 가져오는 함수
  function getCookie(key) {

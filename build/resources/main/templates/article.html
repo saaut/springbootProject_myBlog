@@ -43,10 +43,21 @@
                         </thead>
                         <tbody>
                         <!-- 각 댓글을 표 형식으로 표시 -->
-                        <tr th:each="item : ${comments}">
-                            <td th:text="${item.comment}"></td> <!-- 댓글 내용 -->
-                            <td th:text="${item.nickname}"></td> <!-- 댓글 작성자 -->
-                            <td th:text="${#temporals.format(item.modifiedAt, 'yyyy-MM-dd HH:mm')}"></td> <!-- 댓글 작성자 -->
+                        <tr th:each="item : ${comments}" th:id="'comments-' + ${item.id}">
+                            <td>
+                                <div class="comment-content" th:text="${item.comment}"></div> <!-- 댓글 내용 -->
+                                <div class="comment-info">
+                                    <span th:text="${item.nickname}"></span> <!-- 댓글 작성자 -->
+                                    <span class="text-muted" th:text="${#temporals.format(item.modifiedAt, 'yyyy-MM-dd HH:mm')}"></span> <!-- 댓글 작성일 -->
+                                </div>
+                            </td>
+                            <!-- 수정 및 삭제 버튼 추가 -->
+                            <td class="comment-buttons">
+                                <button type="button" id="modify-comment-btn" class="btn btn-sm btn-outline-primary">수정</button>
+                                <!--<button type="button" id="delete-comment-btn" class="btn btn-sm btn-outline-primary">삭제</button>-->
+                                <button type="button" th:onclick="'commentDelete(' + ${item.articleId} + ',' + ${item.id} + ',' + ${item.userId} + ',' + ${item.id} + ')'" class="btn btn-sm btn-outline-primary">삭제</button>
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>
